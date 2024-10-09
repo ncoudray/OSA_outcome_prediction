@@ -1,0 +1,4 @@
+Artifact
+Necrotic_Tumor
+Normal_Tissue
+Viable_Tumor
