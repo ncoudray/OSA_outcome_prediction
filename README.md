@@ -86,7 +86,7 @@ cd ..
 ### 3.b. Project tiles into the trained supervised network
 The following steps are run from the HPL pipeline code; for data organization and filename conventions, see the [HPL github page](https://github.com/AdalbertoCq/Histomorphological-Phenotype-Learning). 
 ```shell
-sbatch sb_3b_project.py
+sbatch sb_3b_project.sh
 ```
 
 ### 3.c. Add field to header
@@ -102,7 +102,19 @@ sb_3c_AddField.sh
 
 ### 3.d. Assign HPCs
 ```shell
-sbatch --job-name=3d_r1  --output=log_3d_r1_%A.out --error=log_3d_r1_%A.err sb_3d_Assign_Clusters.py 1.0
+sbatch --job-name=3d_r1  --output=log_3d_r1_%A.out --error=log_3d_r1_%A.err sb_3d_Assign_Clusters.sh 1.0
+```
+
+### 3.e. Cox regression
+Needs to be run first without then with the `force_fold` option
+```shell
+sbatch sb_3e_CoxRef.sh
+```
+
+### 3.f. Cox regression for individual fold
+Add `remove_clusters = [21]` in `report_representationsleiden_cox_individual.py` script retrieved erom HPL github page and run:
+```shell
+sbatch sb_3f_CoxReg_Indiv.sh
 ```
 
 
